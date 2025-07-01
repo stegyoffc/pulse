@@ -17,11 +17,11 @@
 
   <!-- Toggles -->
   <div class="fixed top-4 right-4 flex space-x-2 z-50">
-    <button id="theme-toggle" aria-label="Toggle theme" class="p-2 bg-gray-200 dark:bg-gray-800 rounded-full shadow focus:outline-none">
-      <ion-icon name="moon-outline" size="large"></ion-icon>
+    <button id="theme-toggle" aria-label="Toggle theme" class="p-1 bg-gray-200 dark:bg-gray-800 rounded-full shadow focus:outline-none">
+      <ion-icon id="theme-icon" name="moon-outline" class="w-6 h-6"></ion-icon>
     </button>
-    <button id="lang-toggle" aria-label="Toggle language" class="p-2 bg-gray-200 dark:bg-gray-800 rounded-full shadow focus:outline-none">
-      <ion-icon name="language-outline" size="large"></ion-icon>
+    <button id="lang-toggle" aria-label="Toggle language" class="p-1 bg-gray-200 dark:bg-gray-800 rounded-full shadow focus:outline-none">
+      <span id="lang-text" class="text-gray-800 dark:text-gray-100 font-semibold">EN</span>
     </button>
   </div>
 
@@ -99,7 +99,7 @@
     <h2 data-key="contact.title" class="text-3xl font-bold text-center mb-6">Get in Touch</h2>
     <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
       <!-- Left: manager info -->
-      <div class="self-start space-y-4 bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+      <div class="self-start space-y-4 bg-white dark:bg-gray-700 p-4 rounded-lg shadow-lg w-max">
         <h3 class="text-xl font-semibold">Manager Info</h3>
         <div class="flex items-center space-x-3">
           <ion-icon name="call-outline" size="large"></ion-icon>
@@ -164,8 +164,20 @@
       const menu    = document.getElementById('mobile-menu');
       if(menuBtn && menu) menuBtn.addEventListener('click', ()=> menu.classList.toggle('hidden'));
       // Language toggle
-      const langBtn = document.getElementById('lang-toggle'); let curLang = localStorage.language||'en'; applyTranslations(curLang);
-      langBtn.addEventListener('click', ()=> { curLang = curLang==='en'?'cz':'en'; localStorage.language=curLang; applyTranslations(curLang); });
+      const langBtn = document.getElementById('lang-toggle');
+      const langText = document.getElementById('lang-text');
+      // Initialize language
+      let curLang = localStorage.language || 'en';
+      applyTranslations(curLang);
+      // Set initial lang-text (show the opposite language code)
+      langText.textContent = curLang === 'en' ? 'CZ' : 'EN';
+      langBtn.addEventListener('click', () => {
+        curLang = curLang === 'en' ? 'cz' : 'en';
+        localStorage.language = curLang;
+        applyTranslations(curLang);
+        // Update lang-text after toggle
+        langText.textContent = curLang === 'en' ? 'CZ' : 'EN';
+      });
       // Theme toggle
       const themeBtn = document.getElementById('theme-toggle'); const icon = themeBtn.querySelector('ion-icon');
       let curTheme = localStorage.theme||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
