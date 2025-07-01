@@ -12,7 +12,7 @@
       theme: { extend: { colors: { primary: '#1f2937', accent: '#f59e0b' } } }
     }
   </script>
-  <!-- Ionicons for social icons -->
+  <!-- Ionicons -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <!-- Stripe.js -->
@@ -20,41 +20,37 @@
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-colors duration-300">
 
-  <!-- Theme Toggle -->
-  <button id="theme-toggle" class="fixed top-4 right-4 p-2 bg-gray-200 dark:bg-gray-800 rounded-full shadow-lg focus:outline-none">🌙</button>
-  <script>
-    const btn = document.getElementById('theme-toggle');
-    const root = document.documentElement;
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      root.classList.add('dark'); btn.textContent = '☀️';
-    }
-    btn.addEventListener('click', () => {
-      root.classList.toggle('dark');
-      const isDark = root.classList.contains('dark');
-      localStorage.theme = isDark ? 'dark' : 'light';
-      btn.textContent = isDark ? '☀️' : '🌙';
-    });
-  </script>
+  <!-- Theme & Language Toggles -->
+  <div class="fixed top-4 right-4 flex space-x-2 z-30">
+    <button id="theme-toggle" class="p-2 bg-gray-200 dark:bg-gray-800 rounded-full shadow-lg focus:outline-none">
+      <ion-icon name="moon-outline"></ion-icon>
+    </button>
+    <button id="lang-toggle" class="p-2 bg-gray-200 dark:bg-gray-800 rounded-full shadow-lg focus:outline-none text-sm">
+      EN
+    </button>
+  </div>
 
   <!-- Navigation -->
   <nav class="fixed top-0 w-full bg-white dark:bg-gray-900 shadow-md z-20">
     <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
-      <a href="#hero" class="text-2xl font-bold text-gray-800 dark:text-gray-100">PULSE</a>
+      <a href="#hero" class="text-2xl font-bold text-gray-800 dark:text-gray-100" data-i18n="nav.home">PULSE</a>
       <div class="hidden md:flex space-x-6">
-        <a href="#hero" class="py-2 hover:text-accent">Home</a>
-        <a href="#about" class="py-2 hover:text-accent">About</a>
-        <a href="#shop" class="py-2 hover:text-accent">Shop</a>
-        <a href="#contact" class="py-2 hover:text-accent">Contact</a>
+        <a href="#hero" class="py-2 hover:text-accent" data-i18n="nav.home">Home</a>
+        <a href="#about" class="py-2 hover:text-accent" data-i18n="nav.about">About</a>
+        <a href="#shop" class="py-2 hover:text-accent" data-i18n="nav.shop">Shop</a>
+        <a href="#contact" class="py-2 hover:text-accent" data-i18n="nav.contact">Contact</a>
       </div>
       <button id="mobile-menu-button" class="md:hidden focus:outline-none">
-        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
       </button>
     </div>
     <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900">
-      <a href="#hero" class="block py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-700">Home</a>
-      <a href="#about" class="block py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-700">About</a>
-      <a href="#shop" class="block py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-700">Shop</a>
-      <a href="#contact" class="block py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-700">Contact</a>
+      <a href="#hero" class="block py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-700" data-i18n="nav.home">Home</a>
+      <a href="#about" class="block py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-700" data-i18n="nav.about">About</a>
+      <a href="#shop" class="block py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-700" data-i18n="nav.shop">Shop</a>
+      <a href="#contact" class="block py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-700" data-i18n="nav.contact">Contact</a>
     </div>
   </nav>
 
@@ -62,17 +58,22 @@
   <section id="hero" class="pt-16 h-screen bg-gradient-to-tr from-accent to-primary text-white flex items-center justify-center relative">
     <img src="your-hero-image.jpg" alt="Pulse on stage" class="absolute inset-0 w-full h-full object-cover opacity-20"/>
     <div class="relative z-10 text-center px-4">
-      <h1 class="text-4xl md:text-6xl font-bold mb-4">PULSE</h1>
-      <p class="text-lg md:text-2xl mb-6">Feel the rhythm. Join the journey.</p>
-      <a href="#shop" class="bg-white text-primary font-semibold py-3 px-6 rounded-lg shadow hover:bg-gray-100 transition">Shop Merch</a>
+      <h1 class="text-4xl md:text-6xl font-bold mb-4" data-i18n="hero.headline">PULSE</h1>
+      <p class="text-lg md:text-2xl mb-6" data-i18n="hero.subhead">Feel the rhythm. Join the journey.</p>
+      <a href="#shop" class="bg-white text-primary font-semibold py-3 px-6 rounded-lg shadow hover:bg-gray-100 transition" data-i18n="hero.shop">Shop Merch</a>
     </div>
   </section>
 
   <!-- About Section -->
   <section id="about" class="py-20 px-6 md:px-20 bg-gray-50 dark:bg-gray-800 text-center">
-    <h2 class="text-3xl font-bold mb-4">About Us</h2>
-    <svg class="mx-auto mb-6 w-24 h-24 opacity-30" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none"/><path d="M30,70 Q50,10 70,70" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-    <p class="text-lg leading-relaxed">We are a band from Czech Republic named PULSE, playing covers of popular Czech and English songs. Feel free to check us out.</p>
+    <h2 class="text-3xl font-bold mb-4" data-i18n="about.title">About Us</h2>
+    <svg class="mx-auto mb-6 w-24 h-24 opacity-30" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none"/>
+      <path d="M30,70 Q50,10 70,70" stroke="currentColor" stroke-width="2" fill="none"/>
+    </svg>
+    <p class="text-lg leading-relaxed" data-i18n="about.copy">
+      We are a band from Czech Republic named PULSE, playing covers of popular Czech and English songs. Feel free to check us out.
+    </p>
     <!-- Social Media Buttons -->
     <div class="mt-8 flex justify-center space-x-8">
       <a href="https://www.tiktok.com/@__p_u_l_s_e__" target="_blank" aria-label="TikTok" class="text-gray-800 dark:text-gray-100 hover:text-accent transition">
@@ -90,7 +91,7 @@
   <!-- Shop Section -->
   <section id="shop" class="py-20 px-6 md:px-20">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-12">Merch Store</h2>
+      <h2 class="text-3xl font-bold text-center mb-12" data-i18n="shop.title">Merch Store</h2>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Product Card -->
         <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg flex flex-col overflow-hidden">
@@ -112,37 +113,148 @@
   <section id="contact" class="py-20 px-6 md:px-20 bg-gray-50 dark:bg-gray-800">
     <div class="max-w-4xl mx-auto grid lg:grid-cols-2 gap-12">
       <div class="flex flex-col justify-center space-y-6">
-        <h2 class="text-3xl font-bold">Get in Touch</h2>
-        <p>Questions about shows or custom merch?</p>
-        <div class="flex items-center"><svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h..."/></svg><span class="font-medium">+420 123 456 789</span></div>
-        <div class="flex items-center"><svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h16v16H4V4z"/></svg><span class="font-medium">info@pulseband.com</span></div>
+        <h2 class="text-3xl font-bold" data-i18n="contact.title">Get in Touch</h2>
+        <p data-i18n="contact.copy">Questions about shows or custom merch?</p>
+        <div class="flex items-center">
+          <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h..."/></svg>
+          <span class="font-medium">+420 123 456 789</span>
+        </div>
+        <div class="flex items-center">
+          <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h16v16H4V4z"/></svg>
+          <span class="font-medium">info@pulseband.com</span>
+        </div>
       </div>
-      <form action="#" class="space-y-6">
-        <div><label class="block mb-1 font-medium">Name</label><input type="text" required class="w-full p-3 border rounded-lg bg-white dark:bg-gray-700 focus:outline-none"/></div>
-        <div><label class="block mb-1 font-medium">Email</label><input type="email" required class="w-full p-3 border rounded-lg bg-white dark:bg-gray-700 focus:outline-none"/></div>
-        <div><label class="block mb-1 font-medium">Message</label><textarea rows="4" required class="w-full p-3 border rounded-lg bg-white dark:bg-gray-700 focus:outline-none"></textarea></div>
-        <button type="submit" class="w-full bg-accent text-white py-3 rounded-lg font-semibold hover:opacity-90 transition">Send Message</button></div>
+      <form id="contact-form" class="space-y-6">
+        <div>
+          <label class="block mb-1 font-medium" for="name" data-i18n="contact.form.name">Name</label>
+          <input id="name" name="name" type="text" required class="w-full p-3 border rounded-lg bg-white dark:bg-gray-700 focus:outline-none"/>
+        </div>
+        <div>
+          <label class="block mb-1 font-medium" for="email" data-i18n="contact.form.email">Email</label>
+          <input id="email" name="email" type="email" required class="w-full p-3 border rounded-lg bg-white dark:bg-gray-700 focus:outline-none"/>
+        </div>
+        <div>
+          <label class="block mb-1 font-medium" for="message" data-i18n="contact.form.message">Message</label>
+          <textarea id="message" name="message" rows="4" required class="w-full p-3 border rounded-lg bg-white dark:bg-gray-700 focus:outline-none"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-accent text-white py-3 rounded-lg font-semibold hover:opacity-90 transition" data-i18n="contact.form.submit">
+          Send Message
+        </button>
       </form>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="py-8 bg-primary text-gray-300 text-center">
-    <p>&copy; 2025 PULSE. All rights reserved.</p>
-    <div class="mt-4 flex justify-center space-x-4"><a href="#" aria-label="Facebook" class="hover:text-white">FB</a><a href="#" aria-label="Instagram" class="hover:text-white">IG</a><a href="#" aria-label="Twitter" class="hover:text-white">TW</a></div>
+    <p data-i18n="footer.copy">© 2025 PULSE. All rights reserved.</p>
+    <div class="mt-4 flex justify-center space-x-4">
+      <a href="#" aria-label="Facebook" class="hover:text-white">FB</a>
+      <a href="#" aria-label="Instagram" class="hover:text-white">IG</a>
+      <a href="#" aria-label="Twitter" class="hover:text-white">TW</a>
+    </div>
   </footer>
 
   <!-- Mobile Menu Toggle -->
-  <script>document.getElementById('mobile-menu-button').addEventListener('click',()=>{document.getElementById('mobile-menu').classList.toggle('hidden');});</script>
+  <script>
+    document.getElementById('mobile-menu-button').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
 
   <!-- Stripe Checkout Integration -->
   <script>
     const stripe = Stripe('pk_test_YOUR_PUBLISHABLE_KEY');
-    document.querySelectorAll('.stripe-button').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        fetch('/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({priceId:btn.dataset.priceId})})
-          .then(r=>r.json()).then(session=>stripe.redirectToCheckout({sessionId:session.id})).catch(console.error);
+    document.querySelectorAll('.stripe-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        fetch('/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ priceId: btn.dataset.priceId })
+        })
+        .then(res => res.json())
+        .then(session => stripe.redirectToCheckout({ sessionId: session.id }))
+        .catch(console.error);
       });
+    });
+  </script>
+
+  <!-- Theme & Language & Translation Script -->
+  <script>
+    // Translations
+    const translations = {
+      en: {
+        'nav.home':'Home','nav.about':'About','nav.shop':'Shop','nav.contact':'Contact',
+        'hero.headline':'PULSE','hero.subhead':'Feel the rhythm. Join the journey.','hero.shop':'Shop Merch',
+        'about.title':'About Us','about.copy':'We are a band from Czech Republic named PULSE, playing covers of popular Czech and English songs. Feel free to check us out.',
+        'shop.title':'Merch Store',
+        'contact.title':'Get in Touch','contact.copy':'Questions about shows or custom merch?',
+        'contact.form.name':'Name','contact.form.email':'Email','contact.form.message':'Message','contact.form.submit':'Send Message',
+        'footer.copy':'© 2025 PULSE. All rights reserved.'
+      },
+      cz: {
+        'nav.home':'Domů','nav.about':'O nás','nav.shop':'Obchod','nav.contact':'Kontakt',
+        'hero.headline':'PULSE','hero.subhead':'Prožij rytmus. Přidej se k nám.','hero.shop':'Koupit merč',
+        'about.title':'O nás','about.copy':'Jsme kapela z České republiky pojmenovaná PULSE a hrajeme covery populárních českých i anglických písní. Mrkni na nás.',
+        'shop.title':'Obchod s merčem',
+        'contact.title':'Kontaktujte nás','contact.copy':'Dotazy ohledně koncertů nebo vlastních zakázek?',
+        'contact.form.name':'Jméno','contact.form.email':'Email','contact.form.message':'Zpráva','contact.form.submit':'Odeslat zprávu',
+        'footer.copy':'© 2025 PULSE. Všechna práva vyhrazena.'
+      }
+    };
+
+    function applyTranslations(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) el.textContent = translations[lang][key];
+      });
+    }
+
+    // Theme toggle
+    const themeBtn = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    function setTheme(theme) {
+      root.classList.toggle('dark', theme === 'dark');
+      localStorage.theme = theme;
+      themeBtn.innerHTML = `<ion-icon name="${theme==='dark'?'sunny-outline':'moon-outline'}"></ion-icon>`;
+    }
+    const storedTheme = localStorage.theme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    setTheme(storedTheme);
+    themeBtn.addEventListener('click', () => {
+      setTheme(root.classList.contains('dark') ? 'light' : 'dark');
+    });
+
+    // Language toggle
+    const langBtn = document.getElementById('lang-toggle');
+    function setLanguage(lang) {
+      localStorage.language = lang;
+      applyTranslations(lang);
+      document.documentElement.lang = lang;
+      langBtn.textContent = lang === 'en' ? 'CZ' : 'EN';
+    }
+    const storedLang = localStorage.language || 'en';
+    setLanguage(storedLang);
+    langBtn.addEventListener('click', () => {
+      setLanguage(document.documentElement.lang === 'en' ? 'cz' : 'en');
+    });
+
+    // Contact form submission
+    document.getElementById('contact-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const f = e.target;
+      const payload = { name: f.name.value, email: f.email.value, message: f.message.value };
+      try {
+        const res = await fetch('/contact', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) throw new Error(await res.text());
+        alert(translations[document.documentElement.lang]['contact.form.submit'] + ' – OK!');
+        f.reset();
+      } catch (err) {
+        console.error(err);
+        alert('Error sending message.');
+      }
     });
   </script>
 </body>
