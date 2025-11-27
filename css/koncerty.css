@@ -1,0 +1,1046 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+:root {
+    --bg-dark: #050509;
+    --bg-light: #f5f5f7;
+    --fg-dark: #f9fafb;
+    --fg-light: #111827;
+    --accent: #e11d48;
+    --accent-soft: rgba(225, 29, 72, 0.18);
+    --border-subtle-dark: #1f2937;
+    --border-subtle-light: #e5e7eb;
+    --card-dark: #0b0b11;
+    --card-light: #ffffff;
+
+    --radius-xl: 18px;
+    --shadow-soft-dark: 0 18px 45px rgba(0, 0, 0, 0.7);
+    --shadow-soft-light: 0 18px 45px rgba(15, 23, 42, 0.08);
+}
+
+/* LIGHT / DARK THEME */
+
+body.theme-dark {
+    background: radial-gradient(circle at top, #111827 0, #020617 45%, #000000 100%);
+    color: var(--fg-dark);
+}
+
+body.theme-light {
+    background: radial-gradient(circle at top, #ffffff 0, #e5e7eb 40%, #d1d5db 100%);
+    color: var(--fg-light);
+}
+
+body {
+    margin: 0;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Layout helpers */
+
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* HEADER */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(12px);
+}
+
+body.theme-dark .site-header {
+    background: rgba(3, 7, 18, 0.9);
+    border-bottom: 1px solid var(--border-subtle-dark);
+}
+
+body.theme-light .site-header {
+    background: rgba(249, 250, 251, 0.9);
+    border-bottom: 1px solid var(--border-subtle-light);
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+}
+
+body.theme-dark .logo span {
+    color: var(--fg-dark);
+}
+
+body.theme-light .logo span {
+    color: var(--fg-light);
+}
+
+.logo span {
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    font-size: 0.9rem;
+}
+
+.main-nav {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.main-nav a {
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+}
+
+body.theme-dark .main-nav a {
+    color: #9ca3af;
+}
+
+body.theme-light .main-nav a {
+    color: #4b5563;
+}
+
+.main-nav a:hover {
+    color: var(--accent);
+}
+
+.main-nav a.active {
+    color: var(--accent);
+}
+
+.main-nav a.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 18px;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--accent);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.theme-toggle {
+    border: none;
+    border-radius: 999px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+body.theme-dark .theme-toggle {
+    background: #020617;
+    color: #e5e7eb;
+    box-shadow: 0 0 0 1px #111827;
+}
+
+body.theme-light .theme-toggle {
+    background: #e5e7eb;
+    color: #111827;
+    box-shadow: 0 0 0 1px #cbd5f5;
+}
+
+/* HERO */
+
+.hero {
+    padding: 3.5rem 0 2.5rem;
+}
+
+.hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: clamp(3rem, 6vw, 4.2rem);
+    margin: 0 0 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+body.theme-dark .hero-text h1 {
+    color: #f9fafb;
+}
+
+body.theme-light .hero-text h1 {
+    color: #030712;
+}
+
+.subtitle {
+    margin: 0 0 1.5rem;
+    line-height: 1.6;
+    max-width: 32rem;
+    opacity: 0.9;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border-radius: 999px;
+    padding: 0.65rem 1.4rem;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    font-weight: 500;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.btn.primary {
+    background: var(--accent);
+    color: #f9fafb;
+    box-shadow: 0 14px 30px rgba(225, 29, 72, 0.45);
+}
+
+.btn.primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 18px 40px rgba(225, 29, 72, 0.6);
+}
+
+body.theme-dark .btn.ghost {
+    background: transparent;
+    color: #e5e7eb;
+    box-shadow: 0 0 0 1px #1f2937;
+}
+
+body.theme-light .btn.ghost {
+    background: transparent;
+    color: #111827;
+    box-shadow: 0 0 0 1px #d1d5db;
+}
+
+.btn.ghost:hover {
+    transform: translateY(-1px);
+}
+
+.socials {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.social-link {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.05rem;
+}
+
+body.theme-dark .social-link {
+    background: #020617;
+    color: #e5e7eb;
+    box-shadow: 0 0 0 1px #1f2937;
+}
+
+body.theme-light .social-link {
+    background: #e5e7eb;
+    color: #111827;
+    box-shadow: 0 0 0 1px #d1d5db;
+}
+
+.social-link:hover {
+    color: var(--accent);
+}
+
+/* HERO IMAGE */
+
+.hero-image {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-photo-placeholder {
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 3/4;
+    border-radius: 32px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1.2rem;
+    box-sizing: border-box;
+}
+
+body.theme-dark .hero-photo-placeholder {
+    background:
+        linear-gradient(145deg, rgba(225, 29, 72, 0.45), rgba(59, 130, 246, 0.25)),
+        url("../img/hero.jpg") center/cover no-repeat;
+    box-shadow: var(--shadow-soft-dark);
+    color: #f9fafb;
+}
+
+body.theme-light .hero-photo-placeholder {
+    background:
+        linear-gradient(145deg, rgba(225, 29, 72, 0.22), rgba(37, 99, 235, 0.12)),
+        url("../img/hero.jpg") center/cover no-repeat;
+    box-shadow: var(--shadow-soft-light);
+    color: #111827;
+}
+
+/* ABOUT */
+
+.about {
+    padding: 1rem 0 3rem;
+}
+
+.about h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+}
+
+.about p {
+    line-height: 1.7;
+    max-width: 40rem;
+    margin-bottom: 0.75rem;
+}
+
+.about a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.about a:hover {
+    text-decoration: underline;
+}
+
+/* FOOTER */
+
+.site-footer {
+    margin-top: auto;
+}
+
+body.theme-dark .site-footer {
+    border-top: 1px solid var(--border-subtle-dark);
+    background: rgba(3, 7, 18, 0.98);
+}
+
+body.theme-light .site-footer {
+    border-top: 1px solid var(--border-subtle-light);
+    background: rgba(249, 250, 251, 0.98);
+}
+
+.footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 0;
+    font-size: 0.85rem;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* NAVIGACE – stejná na PC i mobilu */
+
+.main-nav {
+    display: flex;
+    gap: 1.5rem;
+    margin-left: auto;
+    font-size: 0.9rem;
+}
+
+.main-nav a {
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+}
+
+@media (max-width: 768px) {
+
+    .header-inner {
+        flex-wrap: wrap;
+        justify-content: center;   /* věci pěkně doprostřed */
+        column-gap: 0.8rem;
+        row-gap: 0.4rem;
+        padding: 0 1rem;
+    }
+
+    .logo {
+        margin-right: 0;
+    }
+
+    .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .theme-toggle {
+        margin-left: 0;
+    }
+}
+
+.page-koncerty h1 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.gigs-list {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.gig-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: var(--radius-xl);
+    padding: 0.9rem 1.1rem;
+}
+
+body.theme-dark .gig-card {
+    background: #020617;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid #111827;
+}
+
+body.theme-light .gig-card {
+    background: #ffffff;
+    box-shadow: var(--shadow-soft-light);
+    border: 1px solid #e5e7eb;
+}
+
+.gig-date {
+    text-align: center;
+    min-width: 52px;
+}
+
+.gig-date .day {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.gig-date .month {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+}
+
+.gig-info h3 {
+    margin: 0 0 0.25rem;
+}
+
+.gig-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+
+
+/* Tlačítko pro mobilní menu */
+.nav-toggle {
+    border: none;
+    border-radius: 999px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    display: none; /* na desktopu skryté */
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+body.theme-dark .nav-toggle {
+    background: #020617;
+    color: #e5e7eb;
+    box-shadow: 0 0 0 1px #111827;
+}
+
+body.theme-light .nav-toggle {
+    background: #e5e7eb;
+    color: #111827;
+    box-shadow: 0 0 0 1px #cbd5f5;
+}
+
+
+/* KONCERTY – layout a karty */
+
+.page-koncerty .concerts-wrapper {
+    margin-top: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.page-koncerty .upcoming,
+.page-koncerty .past {
+    max-width: 960px;
+    margin: 0 auto 2.5rem;
+}
+
+.page-koncerty .upcoming h2,
+.page-koncerty .past h2 {
+    margin-bottom: 1rem;
+}
+
+/* Karta koncertu */
+
+.page-koncerty .concert {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: var(--radius-xl);
+    padding: 0.9rem 1.1rem;
+}
+
+body.theme-dark .page-koncerty .concert {
+    background: #020617;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid #111827;
+}
+
+body.theme-light .page-koncerty .concert {
+    background: #ffffff;
+    box-shadow: var(--shadow-soft-light);
+    border: 1px solid #e5e7eb;
+}
+
+.page-koncerty .concert + .concert {
+    margin-top: 0.85rem;
+}
+
+.page-koncerty .concert .date {
+    text-align: center;
+    min-width: 52px;
+}
+
+.page-koncerty .concert .date span:first-child {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.page-koncerty .concert .date span:last-child {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+}
+
+.page-koncerty .concert .info h3 {
+    margin: 0 0 0.25rem;
+}
+
+.page-koncerty .concert .info p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+
+.page-koncerty .concert .show-detail {
+    margin-top: 0.5rem;
+}
+
+/* Tlačítko Zobrazit detail – jemný upgrade */
+
+.show-detail {
+    background: #e50914;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 15px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    font-weight: 500;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.show-detail:hover {
+    background: #ff3344;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+}
+
+/* MODAL – dvousloupcové rozložení */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.modal-overlay.is-visible {
+    display: flex;
+}
+
+.modal-window {
+    position: relative;
+    width: min(960px, 100%);
+    max-height: 90vh;
+    background: var(--card-dark);
+    color: var(--fg-dark);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-soft-dark);
+    border: 1px solid var(--border-subtle-dark);
+    padding: 1.75rem 1.75rem 1.5rem;
+    overflow: hidden;
+}
+
+body.theme-light .modal-window {
+    background: var(--card-light);
+    color: var(--fg-light);
+    box-shadow: var(--shadow-soft-light);
+    border-color: var(--border-subtle-light);
+}
+
+.modal-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 1.75rem;
+    align-items: stretch;
+}
+
+.modal-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    margin: 0;
+    letter-spacing: 0.03em;
+}
+
+.modal-meta {
+    font-size: 0.95rem;
+    margin: 0;
+    opacity: 0.85;
+}
+
+.modal-date {
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.modal-place {
+    font-weight: 500;
+}
+
+.modal-description {
+    margin: 0.75rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.95;
+}
+
+.modal-poster {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-image {
+    width: 100%;
+    max-height: 60vh;
+    object-fit: cover;
+    border-radius: calc(var(--radius-xl) - 4px);
+    box-shadow: var(--shadow-soft-dark);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+/* Zavírací tlačítko */
+
+.modal-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.9rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.85);
+    color: #f9fafb;
+    box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.35);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+body.theme-light .modal-close {
+    background: #e5e7eb;
+    color: #111827;
+    box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.65);
+}
+
+.modal-close:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    background: var(--accent);
+    color: #fff;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .modal-window {
+        padding: 1.4rem 1.25rem 1.25rem;
+        border-radius: 16px;
+    }
+
+    .modal-content {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.25rem;
+    }
+
+    .modal-title {
+        font-size: 1.25rem;
+    }
+
+    .modal-image {
+        max-height: 260px;
+    }
+
+    .modal-close {
+        top: 0.55rem;
+        right: 0.65rem;
+    }
+
+    .page-koncerty .concert {
+        align-items: flex-start;
+    }
+}
+
+/* Obdélník pro plakát v modalu – desktop */
+.poster-frame {
+    width: 320px;
+    height: 450px;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0f172a;
+    border: 1px solid rgba(200, 200, 200, 0.15);
+}
+
+body.theme-light .poster-frame {
+    background: #ffffff;
+    border-color: rgba(60, 60, 60, 0.15);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
+}
+
+.poster-frame .modal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Mobil – aby to neřezalo nahoře/dole */
+@media (max-width: 768px) {
+    .poster-frame {
+        width: 100%;
+        max-width: 260px;
+        height: auto;
+        aspect-ratio: 2 / 3; /* cca plakát */
+    }
+
+    .poster-frame .modal-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* zobrazí celý plakát */
+    }
+}
+
+
+/* ===== MERCH PAGE ===== */
+
+.page-merch h1 {
+    margin-top: 2.5rem;
+    margin-bottom: 1.3rem;
+}
+
+.merch-wrapper {
+    padding-bottom: 3rem;
+}
+
+.merch-intro {
+    max-width: 640px;
+    font-size: 0.98rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.merch-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.2rem;
+}
+
+.merch-card {
+    border-radius: var(--radius-xl);
+    padding: 1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+body.theme-dark .merch-card {
+    background: #020617;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid #111827;
+}
+
+body.theme-light .merch-card {
+    background: #ffffff;
+    box-shadow: 0 16px 35px rgba(15, 23, 42, 0.12);
+    border: 1px solid #e2e8f0;
+}
+
+.merch-card h3 {
+    margin: 0 0 0.2rem;
+    font-size: 1.05rem;
+}
+
+.merch-card p {
+    margin: 0;
+    font-size: 0.93rem;
+}
+
+.merch-card .price {
+    margin-top: 0.3rem;
+    font-weight: 600;
+    font-size: 0.98rem;
+}
+
+.merch-card small {
+    margin-top: 0.2rem;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Výsledek objednávky */
+
+.merch-result {
+    margin-top: 1.5rem;
+}
+
+.order-summary {
+    white-space: pre-wrap;
+    background: rgba(15, 23, 42, 0.6);
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.payment-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-top: 1.5rem;
+}
+
+.payment-info {
+    flex: 1 1 260px;
+    font-size: 0.95rem;
+}
+
+.clean-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.clean-list li {
+    margin-bottom: 0.3rem;
+}
+
+.payment-note {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.payment-qr {
+    flex: 0 0 320px;
+    max-width: 320px;
+    text-align: center;
+}
+
+.payment-qr-box {
+    background: rgba(15, 23, 42, 0.85);
+    padding: 1rem;
+    border-radius: 16px;
+    margin-top: 0.5rem;
+}
+
+.payment-qr-img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+/* Formulář */
+
+.merch-form-section {
+    margin-top: 1.5rem;
+}
+
+.merch-form label {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 0.85rem;
+}
+
+.merch-form input,
+.merch-form select,
+.merch-form textarea {
+    width: 100%;
+    margin-top: 0.3rem;
+    padding: 0.55rem 0.7rem;
+    border-radius: 10px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(15, 23, 42, 0.9);
+    color: inherit;
+    font-family: inherit;
+}
+
+body.theme-light .merch-form input,
+body.theme-light .merch-form select,
+body.theme-light .merch-form textarea {
+    background: #f9fafb;
+    border-color: #cbd5f7;
+}
+
+.merch-form textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.merch-form small {
+    display: block;
+    margin-top: 0.2rem;
+    opacity: 0.8;
+    font-size: 0.85rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+    gap: 2rem;
+}
+
+.form-column h3 {
+    margin-top: 0.4rem;
+    margin-bottom: 0.7rem;
+}
+
+.shipping-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+}
+
+.shipping-option input {
+    width: auto;
+}
+
+.form-note {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-top: 0.5rem;
+}
+
+/* Chybové hlášky */
+
+.card-error {
+    border: 1px solid rgba(248, 113, 113, 0.6);
+    background: rgba(127, 29, 29, 0.5);
+}
+
+/* Responzivita */
+
+@media (max-width: 800px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .payment-layout {
+        flex-direction: column;
+    }
+
+    .payment-qr {
+        max-width: 100%;
+    }
+}
